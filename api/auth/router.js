@@ -26,7 +26,7 @@ router.delete("/", (req, res) => {
   res.send("Logged out");
 });
 
-router.get('/fb', passport.authenticate('facebook', {scope: ['email','user_birthday']}));
+router.get('/fb', passport.authenticate('facebook', {scope: ['email']}));
 
 router.get('/fb/cb', passport.authenticate('facebook'), function(req, res) {
   const { _id, username } = req.user;

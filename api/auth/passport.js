@@ -5,11 +5,11 @@ const userModel = require('../user/model');
 passport.use(new passportFb({
     clientID: "376141353189214",
     clientSecret: "fbaa5f3f1acf543e05ba4b35207672cd",
-    callbackURL: "https://lovebeatbe.herokuapp.com/api/auth/fb/cb",
-    profileFields: ['email', 'displayName', 'birthday']
+    callbackURL: "https://beentogether.herokuapp.com/api/auth/fb/cb",
+    profileFields: ['email', 'displayName']
 }, async (accessToken, refreshToken, profile, done) => {
     try {
-        let temp = JSON.parse(profile._raw);
+        // let temp = JSON.parse(profile._raw);
         const user = await userModel.findOne({ id: profile._json.id });
         if (user) return done(null, user);
         const newUser = await userModel.create({
@@ -17,7 +17,7 @@ passport.use(new passportFb({
             email: profile._json.email,
             username: profile._json.name,
             password: " ",
-            birthday: temp.birthday
+            birthday: " "
         })
         return done(null, newUser);
     } catch (error) {
