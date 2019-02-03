@@ -78,7 +78,7 @@ const getPostOfRela = async (userId) => {
         select: {image:0},
         populate: {
           path : "createdBy",
-          select : "username"
+          select : "username contentType"
         }
       })
       return rela.posts
