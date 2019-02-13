@@ -5,7 +5,7 @@ const createUser = async ({ username, password, email, phone, birthday }) =>
   new Promise((resolve, reject) => {
     userModel
       .create({ username, password, email, phone, birthday })
-      .then(user => resolve({username: user.username, id: user._id}))
+      .then(user => resolve({ username: user.username, id: user._id }))
       .catch(err => reject(err));
   });
 
@@ -53,30 +53,32 @@ const getAvatarData = id =>
       .catch(err => reject(err));
   });
 
-const updateUserAccount = (id, { username, password }) =>
-new Promise((resolve, reject) => {
-  userModel
-    .findById(id)
-    .then(user => {
-      (user.username = username), (user.password = password);
-      return user.save();
-    })
-    .then(data => resolve(data))
-    .catch(err => reject(err));
-});
+const updateUserAccount = (id, { password }) =>
+  new Promise((resolve, reject) => {
+    userModel
+      .findById(id)
+      .then(user => {
+        user.password = password;
+        return user.save();
+      })
+      .then(data => resolve(data))
+      .catch(err => reject(err));
+  });
 
-
-const updateUserInfo = (id, { username,  email, phone, birthday }) =>
-new Promise((resolve, reject) => {
-  userModel
-    .findById(id)
-    .then(user => {
-      (user.username = username), (user.email = email), (user.phone = phone), (user.birthday = birthday);
-      return user.save();
-    })
-    .then(data => resolve(data))
-    .catch(err => reject(err));
-});
+const updateUserInfo = (id, { username, email, phone, birthday }) =>
+  new Promise((resolve, reject) => {
+    userModel
+      .findById(id)
+      .then(user => {
+        (user.username = username),
+          (user.email = email),
+          (user.phone = phone),
+          (user.birthday = birthday);
+        return user.save();
+      })
+      .then(data => resolve(data))
+      .catch(err => reject(err));
+  });
 
 const updateAvatar = (id, avatarFile) =>
   new Promise((resolve, reject) => {

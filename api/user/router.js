@@ -40,7 +40,6 @@ router.get("/:id/avatar", (req, res) => {
 });
 
 router.put("/:id/userAccount", (req, res) => {
-  console.log(req.body)
   userController
     .updateUserAccount(req.params.id, req.body)
     .then(data => res.send(data))
